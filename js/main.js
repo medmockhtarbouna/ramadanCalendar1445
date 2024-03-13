@@ -2,10 +2,10 @@
 let content = document.getElementById("content");
 // content.innerHTML = "";
 let cont = "";
-cont = `<table border="1">`;
-cont += `<tr>`;
+cont = `<table>`;
+cont += `<tr class="font-color-yellow font-size-small">`;
 for (let i = 0; i < header.length; i++) {
-    cont += ` <th>${header[i]}</th>`;
+    cont += ` <td>${header[i]}</td>`;
 }
 
 cont += `</tr>`;
