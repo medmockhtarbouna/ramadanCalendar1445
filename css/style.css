@@ -24,7 +24,7 @@ tr:nth-of-type(even) {
 }
 
 tr:last-of-type {
-  border-bottom: 2px solid #ffb700;
+  border-bottom: 3px solid #ffb700;
 }
 #content {
   margin: 20px;

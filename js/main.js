@@ -135,22 +135,29 @@ function settim() {
 
       let iftTimeRestConv = comparTime(data[i][1]);
       let imsTimeRestConv = comparTime(data[i][7]);
-
-      if (tm < comparTime(data[i][7]).convertTime) {
+      if (tm > comparTime(data[i][1]).convertTime) {
+        imsTimeRest.innerHTML = "انتهى";
+        iftTimeRest.innerHTML = "مستمر";
+        imsTimeRest.className = "font-ar font-color-yellow";
+        iftTimeRest.className = "font-ar font-color-yellow";
+        dashIft.innerHTML = "-";
+      } else if (
+        tm < comparTime(data[i][1]).convertTime &&
+        tm > comparTime(data[i][7]).convertTime
+      ) {
+        iftTimeRest.innerHTML = iftTimeRestConv.formateTime;
+        imsTimeRest.className = "font-ar font-color-yellow";
+        imsTimeRest.innerHTML = "مستمر";
+        imsTimeRest.className = "font-ar font-color-yellow";
+        iftTimeRest.className = "font-ar font-color-yellow";
+      } else if (
+        tm < comparTime(data[i][7]).convertTime
+      ) {
         imsTimeRest.innerHTML = imsTimeRestConv.formateTime;
         iftTimeRest.innerHTML = "مستمر";
         imsTimeRest.className = "font-en font-color-yellow";
         iftTimeRest.className = "font-ar font-color-yellow";
-        dashIft.innerHTML = "-";
-      } else {
-        iftTimeRest.innerHTML = iftTimeRestConv.formateTime;
-        imsTimeRest.innerHTML = "مستمر";
-        imsTimeRest.className = "font-ar font-color-yellow";
-        iftTimeRest.className = "font-en font-color-yellow";
-
-        dashIms.innerHTML = "-";
       }
-
       for (let j = 0; j < t.length; j++) {
         if (j > 0) {
           t[j].innerHTML = data[i][j + 1];
