@@ -12,22 +12,27 @@
         <div class="dateTimeNow">
           <div
             class="font-color-white font-en font-weight text-center font-size-header"
-          >
+           id="timeNow">
             21:09
           </div>
 
           <div
             class="font-color-yellow font-en font-weight text-center font-size-header flex-center"
           >
+          
             <div
-              class="font-color-white font-en font-weight text-center font-size-body"
+              class="font-color-white font-en font-weight text-center font-size-body" id="dateNow"
             >
-              03/12/2024
+               03/12/2024
             </div>
             <div class="m-1 font-size-body font-color-white">-</div>
             <div class="font-size-body">
               <bdi class="font-ar">رمضان</bdi>
-              <span class="font-en">2</span>
+              <span class="font-en" id="dayRamadan">2</span>
+              <!-- <span class="font-en font-color-white">-</span>
+              
+              <bdi class="font-ar font-color-white">نواكشوط</bdi> -->
+
             </div>
           </div>
         </div>
@@ -40,10 +45,10 @@
               class="font-color-white font-en font-weight text-center font-size-small flex-center"
               id="restd"
             >
-              <span class="font-en font-color-yellow">20:15</span>
+              <span class="font-en font-color-yellow" id="imsTimeRest">20:15</span>
 
-              <div class="m-1 font-size-body">-</div>
-              <span class="font-en font-color-white">20:15</span>
+              <div class="m-1 font-size-body" id="dashIms">-</div>
+              <span class="font-en font-color-white" id="imsTime">20:15</span>
             </div>
             <div
               class="font-color-white font-ar font-weight text-center font-size-small flex-center border-top-white"
@@ -56,10 +61,10 @@
               class="font-color-white font-en font-weight text-center font-size-small flex-center"
               id="resth"
             >
-              <span class="font-en font-color-yellow">20:15</span>
+              <span class="font-en font-color-yellow" id="iftTimeRest">20:15</span>
 
-              <div class="m-1 font-size-body">-</div>
-              <span class="font-en font-color-white">20:15</span>
+              <div class="m-1 font-size-body" id="dashIft">-</div>
+              <span class="font-en font-color-white" id="iftTime">20:15</span>
             </div>
             <div
               class="font-color-white font-ar font-weight text-center font-size-small flex-center border-top-white"
@@ -78,10 +83,10 @@
             >
               <div class="font-ar">
                 الصلاة القادمة :
-                <span class="font-ar font-color-white itemCenter">الصبح</span>
+                <span class="font-ar font-color-white itemCenter" id="nextSal">الصبح</span>
                 بعد
                 <span class="font-ar font-color-white itemCenter"
-                  >02:20:15</span
+                  id="timeNextSal">02:20:15</span
                 >
               </div>
             </div>
@@ -108,7 +113,7 @@
               class="font-color-white font-en font-weight text-center font-size-extraSmall flex-center"
               id="restd"
             >
-              <span class="font-en font-color-white">20:15</span>
+              <span class="font-en font-color-white t">20:15</span>
               <!-- <span class="font-en font-color-yellow">20:15</span> -->
             </div>
             <div class="line"></div>
@@ -116,7 +121,7 @@
             <div
               class="font-color-white font-ar font-weight text-center font-size-extraSmall flex-center"
             >
-              الإمساك
+              العشاء
             </div>
           </div>
           <div class="box">
@@ -124,7 +129,7 @@
               class="font-color-white font-en font-weight text-center font-size-extraSmall flex-center"
               id="restd"
             >
-              <span class="font-en font-color-white">20:15</span>
+              <span class="font-en font-color-white t">20:15</span>
               <!-- <span class="font-en font-color-yellow">20:15</span> -->
             </div>
             <div class="line"></div>
@@ -132,7 +137,7 @@
             <div
               class="font-color-white font-ar font-weight text-center font-size-extraSmall flex-center"
             >
-              الإمساك
+              المغرب
             </div>
           </div>
           <div class="box">
@@ -140,7 +145,7 @@
               class="font-color-white font-en font-weight text-center font-size-extraSmall flex-center"
               id="restd"
             >
-              <span class="font-en font-color-white">20:15</span>
+              <span class="font-en font-color-white t">20:15</span>
               <!-- <span class="font-en font-color-yellow">20:15</span> -->
             </div>
             <div class="line"></div>
@@ -148,7 +153,7 @@
             <div
               class="font-color-white font-ar font-weight text-center font-size-extraSmall flex-center"
             >
-              الإمساك
+              العصر
             </div>
           </div>
           <div class="box">
@@ -156,7 +161,7 @@
               class="font-color-white font-en font-weight text-center font-size-extraSmall flex-center"
               id="restd"
             >
-              <span class="font-en font-color-white">20:15</span>
+              <span class="font-en font-color-white t">20:15</span>
               <!-- <span class="font-en font-color-yellow">20:15</span> -->
             </div>
             <div class="line"></div>
@@ -164,7 +169,7 @@
             <div
               class="font-color-white font-ar font-weight text-center font-size-extraSmall flex-center"
             >
-              الإمساك
+              الظهر
             </div>
           </div>
           <div class="box">
@@ -172,7 +177,7 @@
               class="font-color-white font-en font-weight text-center font-size-extraSmall flex-center"
               id="restd"
             >
-              <span class="font-en font-color-white">20:15</span>
+              <span class="font-en font-color-white t">20:15</span>
               <!-- <span class="font-en font-color-yellow">20:15</span> -->
             </div>
             <div class="line"></div>
@@ -180,7 +185,7 @@
             <div
               class="font-color-white font-ar font-weight text-center font-size-extraSmall flex-center"
             >
-              الإمساك
+              الشروق
             </div>
           </div>
           <div class="box">
@@ -188,7 +193,7 @@
               class="font-color-white font-en font-weight text-center font-size-extraSmall flex-center"
               id="restd"
             >
-              <span class="font-en font-color-white">20:15</span>
+              <span class="font-en font-color-white t">20:15</span>
               <!-- <span class="font-en font-color-yellow">20:15</span> -->
             </div>
             <div class="line"></div>
@@ -196,9 +201,20 @@
             <div
               class="font-color-white font-ar font-weight text-center font-size-extraSmall flex-center"
             >
-              الإمساك
+              الفجر
             </div>
           </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="container flex-center">
+          <div class="font-size-body m-3">
+            <!-- <span class="font-en">2</span> -->
+            <span class="font-ar">إمساكية نواكشوط</span>
+          </div>
+          <!-- <div class="itemCenter">
+
+            </div> -->
         </div>
       </div>
 
