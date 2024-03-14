@@ -1,5 +1,17 @@
 let content = document.getElementById("content");
-// content.innerHTML = "";
+let timeNow = document.getElementById("timeNow");
+let dateNow = document.getElementById("dateNow");
+let dayRamadan = document.getElementById("dayRamadan");
+let iftTime = document.getElementById("iftTime");
+let iftTimeRest = document.getElementById("iftTimeRest");
+let imsTime = document.getElementById("imsTime");
+let imsTimeRest = document.getElementById("imsTimeRest");
+let nextSal = document.getElementById("nextSal");
+let timeNextSal = document.getElementById("timeNextSal");
+let dashIft = document.getElementById("dashIft");
+let dashIms = document.getElementById("dashIms");
+let t = document.querySelectorAll(".t");
+
 let cont = "";
 cont = `<table>`;
 cont += `<tr class="font-color-yellow font-size-small trHeader">`;
@@ -16,22 +28,9 @@ for (let i = 0; i < data.length; i++) {
   cont += `</tr>`;
 }
 cont += `</table>`;
-// console.log(cont);
 
 content.innerHTML = cont;
 
-let timeNow = document.getElementById("timeNow");
-let dateNow = document.getElementById("dateNow");
-let dayRamadan = document.getElementById("dayRamadan");
-let iftTime = document.getElementById("iftTime");
-let iftTimeRest = document.getElementById("iftTimeRest");
-let imsTime = document.getElementById("imsTime");
-let imsTimeRest = document.getElementById("imsTimeRest");
-let nextSal = document.getElementById("nextSal");
-let timeNextSal = document.getElementById("timeNextSal");
-let dashIft = document.getElementById("dashIft");
-let dashIms = document.getElementById("dashIms");
-let t = document.querySelectorAll(".t");
 now = new Date();
 
 function convertFormatDate(dateC) {
@@ -47,7 +46,6 @@ function convertFormatDate(dateC) {
   let fDate = d + "/" + m + "/" + y;
   return fDate;
 }
-// convertFormatDate(now);
 function convToHMS(date) {
   let rst = date % 86400;
   let ho = rst / 3600;
@@ -56,12 +54,10 @@ function convToHMS(date) {
   let rst3 = date % 60;
   let sec = rst3;
 
-  // let d = Math.floor(da) ;
   let h = Math.floor(ho);
   let m = Math.floor(min);
   let s = Math.floor(sec);
 
-  // d = (d < 10) ? "0" + d : d;
   h = h < 10 ? "0" + h : h;
   m = m < 10 ? "0" + m : m;
   s = s < 10 ? "0" + s : s;
@@ -95,46 +91,19 @@ function comparTime(time) {
     pt3 = 0;
   }
 
-  // console.log(pt1);
-  // console.log(pt2);
-  // console.log(pt3);
-
   let tm = pt1 * 3600 + pt2 * 60 + pt3;
 
   let now = new Date();
-  // let daymo = 20;
-  // let dat = (daymo*86400) - ((now.getDate()*86400)+(now.getHours()*3600)+(now.getMinutes()*60)+(now.getSeconds()));
 
   let dat =
     tm - (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds());
 
   if (dat < 0) dat = 0;
-
-  // let da = dat / 86400;
-
   let dateConv = convToHMS(dat);
-  // let rst = dat % 86400;
-  // let ho = rst / 3600;
-  // let rst2 = dat % 3600;
-  // let min = rst2 / 60;
-  // let rst3 = dat % 60;
-  // let sec = rst3;
-
-  // // let d = Math.floor(da) ;
-  // let h = Math.floor(ho);
-  // let m = Math.floor(min);
-  // let s = Math.floor(sec);
-
-  // // d = (d < 10) ? "0" + d : d;
-  // h = h < 10 ? "0" + h : h;
-  // m = m < 10 ? "0" + m : m;
-  // s = s < 10 ? "0" + s : s;
-
   return {
     formateTime: dateConv,
     convertTime: tm,
   };
-  // h + ":" + m + ":" + s
 }
 
 setInterval(settim, 1000);
@@ -166,36 +135,22 @@ function settim() {
 
       let iftTimeRestConv = comparTime(data[i][1]);
       let imsTimeRestConv = comparTime(data[i][7]);
-      // console.log(tm);
-      // console.log(iftTimeRestConv.convertTime);
-      // console.log(12 * 3600);
-      // console.log(comparTime(tm));
-      console.log(comparTime(data[i][7]).convertTime);
-      console.log(tm);
-      console.log("==================");
+
       if (tm < comparTime(data[i][7]).convertTime) {
         imsTimeRest.innerHTML = imsTimeRestConv.formateTime;
-        iftTimeRest.remove();
-        dashIft.remove();
-
-        // imsTimeRest.className = "font-en font-color-yellow";
-        console.log(0);
+        iftTimeRest.innerHTML = "انتهى";
+        imsTimeRest.className = "font-en font-color-yellow";
+        iftTimeRest.className = "font-ar font-color-yellow";
+        dashIft.innerHTML = "-";
       } else {
         iftTimeRest.innerHTML = iftTimeRestConv.formateTime;
-        imsTimeRest.remove();
-        dashIms.remove();
+        imsTimeRest.innerHTML = "انتهى";
+        imsTimeRest.className = "font-ar font-color-yellow";
+        iftTimeRest.className = "font-en font-color-yellow";
 
-        // imsTimeRest.className = "font-ar font-color-yellow";
-        console.log(1);
-
+        dashIms.innerHTML = "-";
       }
-      // if (tm > comparTime(data[i][1]).convertTime) {
-      //   iftTimeRest.innerHTML = iftTimeRestConv.formateTime;
-      //   // iftTimeRest.className = "font-en font-color-yellow";
-      // } else {
-      //   iftTimeRest.innerHTML = "انتهى";
-      //   // iftTimeRest.className = "font-ar font-color-yellow";
-      // }
+
       for (let j = 0; j < t.length; j++) {
         if (j > 0) {
           t[j].innerHTML = data[i][j + 1];
@@ -207,7 +162,6 @@ function settim() {
   }
 
   function findNearestTime(bigArray, indexOfArray, selectedItems) {
-    // الحصول على الوقت الحالي
     const now = new Date();
     const currentHours = now.getHours();
     const currentMinutes = now.getMinutes();
@@ -215,7 +169,6 @@ function settim() {
     const currentTimeInSeconds =
       currentHours * 3600 + currentMinutes * 60 + currentSeconds;
 
-    // تحديد الوقت الأقرب من المصفوفة الفرعية
     let minDifference = Infinity;
     let nearestTimeInSeconds;
     let indx;
@@ -231,49 +184,24 @@ function settim() {
         indx = index;
       }
     }
-    console.log("index: " + indx);
 
-    // إذا كان لا يوجد وقت أكبر في المصفوفة التالية، اختر أصغر وقت في المصفوفة التالية
     if (!nearestTimeInSeconds && bigArray[indexOfArray + 1]) {
       const [hours, minutes] = bigArray[indexOfArray + 1][0]
         .split(":")
         .map(Number);
       nearestTimeInSeconds = hours * 3600 + minutes * 60;
-      minDifference = 24 * 3600; // عدد كبير جداً يضمن أنه يتم اختيار أقرب وقت في المصفوفة التالية
+      minDifference = 24 * 3600;
     }
 
-    // إعادة الفارق بوحدة الثواني
     return { minDif: minDifference, idx: indx };
   }
 
-  // مثال على استخدام الدالة
-  // const bigArray = [
-  //   ["12:30", "13:45", "15:20", "16:10", "18:00", "19:30", "21:15"],
-  //   ["10:30", "11:45", "13:20", "14:10", "16:00", "17:30", "19:15"],
-  //   ["08:30", "09:45", "11:20", "12:10", "14:00", "15:30", "17:15"],
-  //   ["06:30", "07:45", "09:20", "10:10", "12:00", "13:30", "15:15"],
-  //   ["04:30", "05:45", "07:20", "08:10", "10:00", "11:30", "13:15"],
-  // ];
-  // const indexOfArray = 2; // اختيار عنصر من المصفوفة الكبيرة
-  // let targetTime = h + ":" + m + ":" + s;
-
-  // const targetTime = "22:00";
-  // let timeConv = comparTime(timeNowData);
-  // console.log("A: "+timeConv.comparTime);
-
-  // تم تحديد وقت أكبر من جميع الأوقات المتاحة
-  // const differenceInSeconds = findNearestTime(data, indexOfArray);
-  const selectedItems = [0, 2, 3, 4, 6]; // تحديد العناصر التي تريد استخدامها
+  const selectedItems = [0, 2, 3, 4, 6];
   const differenceInSeconds = findNearestTime(
     data,
     indexOfArray,
     selectedItems
   );
-  // console.log("الفارق بوحدة الثواني:", differenceInSeconds);
   timeNextSal.innerHTML = convToHMS(differenceInSeconds.minDif);
   nextSal.innerHTML = header[differenceInSeconds.idx];
-  console.log("الفارق بوحدة الثواني:", convToHMS(differenceInSeconds.minDif));
-  console.log("الفارق بوحدة الثواني:", differenceInSeconds.idx);
-
-  console.log(indexOfArray);
 }
