@@ -138,13 +138,13 @@ function settim() {
 
       if (tm < comparTime(data[i][7]).convertTime) {
         imsTimeRest.innerHTML = imsTimeRestConv.formateTime;
-        iftTimeRest.innerHTML = "انتهى";
+        iftTimeRest.innerHTML = "مستمر";
         imsTimeRest.className = "font-en font-color-yellow";
         iftTimeRest.className = "font-ar font-color-yellow";
         dashIft.innerHTML = "-";
       } else {
         iftTimeRest.innerHTML = iftTimeRestConv.formateTime;
-        imsTimeRest.innerHTML = "انتهى";
+        imsTimeRest.innerHTML = "مستمر";
         imsTimeRest.className = "font-ar font-color-yellow";
         iftTimeRest.className = "font-en font-color-yellow";
 
