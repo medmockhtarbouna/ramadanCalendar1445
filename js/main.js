@@ -173,7 +173,7 @@ function settim() {
     const currentHours = now.getHours();
     const currentMinutes = now.getMinutes();
     const currentSeconds = now.getSeconds();
-    const currentTimeInSeconds =
+    const currentTimeInSeconds = 
       currentHours * 3600 + currentMinutes * 60 + currentSeconds;
 
     let minDifference = Infinity;
@@ -199,8 +199,15 @@ function settim() {
       nearestTimeInSeconds = hours * 3600 + minutes * 60;
       minDifference = 24 * 3600;
     }
-
-    return { minDif: minDifference, idx: indx };
+    let tmcom;
+    if (minDifference >= 86399) {
+      if (currentTimeInSeconds > nearestTimeInSeconds) {
+       tmcom = findNearestTime([["23:59:59"]], 0, [0]).minDif;
+       minDifference = tmcom + comparTime(bigArray[indexOfArray+1][6]).convertTime ;
+       indx = 6;
+      }
+    }
+    return { minDif: minDifference, idx: indx, tmcm:tmcom };
   }
 
   const selectedItems = [0, 2, 3, 4, 6];
