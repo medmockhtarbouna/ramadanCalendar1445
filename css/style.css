@@ -5,9 +5,20 @@
 }
 body {
   color: rgb(255, 255, 255);
-  background: url(../img/img7.jpg);
+  background: url(../img/background.jpg);
   background-size: contain;
 }
+
+@font-face {
+  font-family:ar ;
+  src: url(../fonts/Hacen\ Casablanca\ Lt.ttf);
+}
+
+@font-face {
+  font-family:en ;
+  src: url(../fonts/LeagueSpartan-Medium.ttf);
+}
+
 table {
   border-collapse: collapse;
 }
@@ -56,11 +67,11 @@ tr:last-of-type {
 }
 
 .font-ar {
-  font-family: Hacen Casablanca Lt;
+  font-family: ar;
 }
 
 .font-en {
-  font-family: League Spartan;
+  font-family: en;
 }
 .font-weight {
   font-weight: normal;
