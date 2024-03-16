@@ -10,6 +10,8 @@ let nextSal = document.getElementById("nextSal");
 let timeNextSal = document.getElementById("timeNextSal");
 let dashIft = document.getElementById("dashIft");
 let dashIms = document.getElementById("dashIms");
+let imsLabel = document.getElementById("imsLabel");
+let contentMain = document.querySelector(".content");
 let t = document.querySelectorAll(".t");
 
 let cont = "";
@@ -64,7 +66,7 @@ function convToHMS(date) {
   return h + ":" + m + ":" + s;
 }
 
-function comparTime(time) {
+function comparTime(time,tpl = 0) {
   let t = time.split(":");
   let pt1;
   let pt2;
@@ -93,12 +95,18 @@ function comparTime(time) {
 
   let tm = pt1 * 3600 + pt2 * 60 + pt3;
 
+  if (tpl != 0) {
+    tm += tpl;
+  }
+
   let now = new Date();
 
   let dat =
-    tm - (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds());
+    tm -  (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds());
 
-  if (dat < 0) dat = 0;
+  if (dat < 0) {
+    dat = 0;
+  }
   let dateConv = convToHMS(dat);
   return {
     formateTime: dateConv,
@@ -109,6 +117,7 @@ function comparTime(time) {
 setInterval(settim, 1000);
 
 function settim() {
+  let check = [];
   let nw = new Date();
   let tm = nw.getHours() * 3600 + nw.getMinutes() * 60 + nw.getSeconds();
 
@@ -128,19 +137,23 @@ function settim() {
 
   for (let i = 0; i < data.length; i++) {
     if (data[i][8] == dateNowData) {
+      check.push(false)
       indexOfArray = i;
       dayRamadan.innerHTML = data[i][9];
       iftTime.innerHTML = data[i][1];
       imsTime.innerHTML = data[i][7];
-
       let iftTimeRestConv = comparTime(data[i][1]);
       let imsTimeRestConv = comparTime(data[i][7]);
       if (tm > comparTime(data[i][1]).convertTime) {
-        imsTimeRest.innerHTML = "انتهى";
+        let compTmOl = convToHMS(comparTime(comparTime("23:59:59",comparTime(data[i+1][7]).convertTime).formateTime).convertTime);
+        imsTimeRest.innerHTML = compTmOl;
         iftTimeRest.innerHTML = "مستمر";
         imsTimeRest.className = "font-ar font-color-yellow";
         iftTimeRest.className = "font-ar font-color-yellow";
         dashIft.innerHTML = "-";
+        imsTime.innerHTML = data[i+1][7]
+        imsLabel.innerHTML = `<span class="font-ar font-color-yellow pr-1">غدا</span>
+         - الإمساك`;
       } else if (
         tm < comparTime(data[i][1]).convertTime &&
         tm > comparTime(data[i][7]).convertTime
@@ -150,9 +163,7 @@ function settim() {
         imsTimeRest.innerHTML = "مستمر";
         imsTimeRest.className = "font-ar font-color-yellow";
         iftTimeRest.className = "font-ar font-color-yellow";
-      } else if (
-        tm < comparTime(data[i][7]).convertTime
-      ) {
+      } else if (tm < comparTime(data[i][7]).convertTime) {
         imsTimeRest.innerHTML = imsTimeRestConv.formateTime;
         iftTimeRest.innerHTML = "مستمر";
         imsTimeRest.className = "font-en font-color-yellow";
@@ -165,7 +176,46 @@ function settim() {
           t[j].innerHTML = data[i][j];
         }
       }
+    } else {
+      check.push(true);
     }
+  }
+
+  if (!check.includes(false)) {
+    contentMain.innerHTML = `
+    <div class="hidden">
+        <div class="container flex-center">
+          <div class="itemH">
+            <div
+              class="font-color-white font-en font-weight text-center font-size-small flex-center"
+            >
+              <span class="font-ar font-color-yellow border-bottom-white m-2">
+                 المحتوى غير متوفر للأسف 
+              </span>
+            </div>
+            <div
+              class="font-color-white font-ar font-weight text-center font-size-extraSmall flex-center mt-3"
+              
+            >
+              يعرض هذا المحتوى إمساكية شهر رمضان المبارك للسنة الهجرية 1445، وبما أن الشهر الفضيل انتهى لم يعد هذا المحتوى متوفرا
+            </div>
+            <div class="m-4">
+              <div class="text-center copSize">
+                <!-- <span class="font-en font-color-yellow resp">Ramadan Calendar </span> -->
+                <span class="font-en font-color-white">
+                  Designed and Developed by
+                </span>
+                <a href="mailto:medmokhtarbouna@gmail.com">
+                  <span class="font-en font-color-yellow cursor-pointer"
+                    >medmokhtarbouna@gmail.com</span
+                  ></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
   function findNearestTime(bigArray, indexOfArray, selectedItems) {
@@ -173,7 +223,7 @@ function settim() {
     const currentHours = now.getHours();
     const currentMinutes = now.getMinutes();
     const currentSeconds = now.getSeconds();
-    const currentTimeInSeconds = 
+    const currentTimeInSeconds =
       currentHours * 3600 + currentMinutes * 60 + currentSeconds;
 
     let minDifference = Infinity;
@@ -202,12 +252,13 @@ function settim() {
     let tmcom;
     if (minDifference >= 86399) {
       if (currentTimeInSeconds > nearestTimeInSeconds) {
-       tmcom = findNearestTime([["23:59:59"]], 0, [0]).minDif;
-       minDifference = tmcom + comparTime(bigArray[indexOfArray+1][6]).convertTime ;
-       indx = 6;
+        tmcom = findNearestTime([["23:59:59"]], 0, [0]).minDif;
+        minDifference =
+          tmcom + comparTime(bigArray[indexOfArray + 1][6]).convertTime;
+        indx = 6;
       }
     }
-    return { minDif: minDifference, idx: indx, tmcm:tmcom };
+    return { minDif: minDifference, idx: indx, tmcm: tmcom };
   }
 
   const selectedItems = [0, 2, 3, 4, 6];
